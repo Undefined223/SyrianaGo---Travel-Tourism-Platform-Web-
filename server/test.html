@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Stripe Payment</title>
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <button id="bookNow">Test Payment</button>
+
+  <script>
+    const stripe = Stripe('pk_test_51RT9HZR7AzLraJmAsv3zVEzVUFH1tw9FkXVIiof0gNsLcADKugoTNNSM2HtMkUPBryOQtok2RrsTalxbcCNNn7kO002acJFzNq'); // Replace with your key
+
+    async function handlePayment() {
+      try {
+        // Step 1: Create PaymentIntent via your backend
+        const bookingResponse = await fetch('http://localhost:5000/api/booking', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: "68365203c962ccfdbc52d128",
+            listingId: "6834d302f7625411e05ffdbc",
+            details: { price: 100 },
+            paymentMethod: "stripe"
+          })
+        });
+
+        const { client_secret } = await bookingResponse.json();
+
+        // Step 2: Confirm payment using Stripe.js
+        const { error } = await stripe.confirmCardPayment(client_secret, {
+          payment_method: {
+            card: {
+              number: '4242424242424242',
+              exp_month: 12,
+              exp_year: 34,
+              cvc: '123'
+            }
+          }
+        });
+
+        if (error) throw error;
+        alert('Payment succeeded!');
+      } catch (err) {
+        console.error('Payment failed:', err);
+        alert('Payment failed! Check console.');
+      }
+    }
+
+    document.getElementById('bookNow').addEventListener('click', handlePayment);
+  </script>
+</body>
+</html>
