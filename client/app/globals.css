@@ -1,0 +1,47 @@
+@import 'tailwindcss';
+
+:root {
+  --background: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@font-face {
+  font-family: 'Tennyson BC';
+  src: url('/assets/fonts/Tennyson.ttf') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Times New Roman Custom'; /* Use a custom name to avoid conflicts */
+  src: url('/assets/fonts/times.ttf') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+[dir="rtl"] {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.rtl-support {
+  text-align: right;
+  direction: rtl;
+}
+
+.ltr-support {
+  text-align: left;
+  direction: ltr;
+}

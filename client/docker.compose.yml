@@ -1,0 +1,107 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ../server/
+      dockerfile: ../server/server.Dockerfile
+    env_file:
+      - .env
+    environment:
+      LETSENCRYPT_HOST: api.syrianago.com
+      LETSENCRYPT_EMAIL: asaddiddin@gmail.com
+      PORT: 5000
+      GOOGLE_CLIENT_ID: 613189110305-pp1hrs96br3v02jh512l61klbemsglqu.apps.googleusercontent.com
+      GOOGLE_CLIENT_SECRET: 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
+      JWT_SECRET: JFAINV
+      REFRESH_SECRET: FEAFEA
+      ACCESS_SECRET: AFAFASS
+      MONGO_URL: mongodb://127.0.0.1:27017/booking
+      FRONTEND_URL: http://localhost:3000
+      APP_USER: tuniweeb@gmail.com
+      APP_PASS: evmp yipc otbf tyol
+      STRIPE_SECRET_KEY: sk_test_51PHuF7HJidMgnIYBbdpVDCB1dUSS0erBsDXqjXvmkVWy4EanYniioYYRSbxzlVQwOy7Y22Z88AfqbnGY129nlRfS00pvDRgCuf
+      STRIPE_WEBHOOK_SECRET: whsec_ab050a459e1065a9c628fed2a7fa48091018fe118ec9c332df0b1c818dee1b3d
+    ports:
+      - "5000:5000"
+    networks:
+      - proxy
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2048M
+    restart: unless-stopped
+
+  react-app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      VIRTUAL_HOST: syrianago.com
+      VIRTUAL_PORT: 3000  # Frontend port remains 3000
+      LETSENCRYPT_HOST: syrianago.com
+      LETSENCRYPT_EMAIL: infoplusgrb@gmail.com
+      NEXT_PUBLIC_API_URL: https://api.syrianago.com/api
+      NEXT_PUBLIC_NO_API_URL: https://api.syrianago.com/
+    ports:
+      - "3000:3000"  # Mapping external port 3000 to internal 3000
+    depends_on:
+      server:
+        condition: service_started
+    networks:
+      - proxy
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 956M
+    restart: unless-stopped
+
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./data/certs:/etc/nginx/certs:ro
+      - ./data/vhost.d:/etc/nginx/vhost.d
+      - ./data/html:/usr/share/nginx/html
+    networks:
+      - proxy
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt
+    depends_on:
+      - nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./data/certs:/etc/nginx/certs:rw
+      - ./data/vhost.d:/etc/nginx/vhost.d
+      - ./data/acme:/etc/acme.sh
+      - ./data/html:/usr/share/nginx/html
+    environment:
+      NGINX_PROXY_CONTAINER: nginx-proxy
+    networks:
+      - proxy
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+
+networks:
+  proxy:
+    driver: bridge
