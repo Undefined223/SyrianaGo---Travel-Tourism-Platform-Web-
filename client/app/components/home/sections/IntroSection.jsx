@@ -1,9 +1,11 @@
 'use client';
+import { useLanguage } from '@/app/contexts/LanguageContext';
 import { useState, useEffect } from 'react';
 
 const IntroSection = () => {
   const [showVideo, setShowVideo] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const { t } = useLanguage(); // Get translation function
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -23,7 +25,7 @@ const IntroSection = () => {
           <div className="absolute inset-0 bg-black/40 z-10"></div>
           <img 
             src="/assets/images/introImage.jpeg" 
-            alt="SyrianaGo" 
+            alt={t('common.syrianaGo')} 
             className="w-full h-full object-cover brightness-90"
           />
         </div>
@@ -39,7 +41,7 @@ const IntroSection = () => {
             className="w-full h-full object-cover brightness-95"
           >
             <source src="/assets/videos/intro.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
+            {t('common.videoNotSupported')}
           </video>
         </div>
       </div>
@@ -48,11 +50,11 @@ const IntroSection = () => {
       <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center z-20">
         <div className={`transition-all duration-1000 ${isTransitioning ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
           <h1 className="text-5xl md:text-6xl xl:text-7xl font-tennyson text-white mb-4 tracking-tight drop-shadow-lg">
-            SyrianaGo
+            {t('common.syrianaGo')}
           </h1>
           <div className={`h-px bg-[#337914] transition-all duration-700 mx-auto ${isTransitioning ? 'w-0' : 'w-64'} my-6`}></div>
           <p className="text-xl md:text-2xl text-white font-serif opacity-95 drop-shadow-md">
-            Where memories grow
+            {t('home.tagline')}
           </p>
         </div>
       </div>

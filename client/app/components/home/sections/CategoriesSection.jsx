@@ -81,7 +81,7 @@ const CategoriesSection = () => {
                                         <div className="absolute inset-3 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-inner">
                                             <img
                                                 src={`http://localhost:5000/uploads/${cat.icon}`}
-                                                alt={cat.name[language] || cat.name.en}
+                                                alt={cat?.name[language] }
                                                 width={80}
                                                 height={80}
                                                 unoptimized="true"
@@ -97,13 +97,13 @@ const CategoriesSection = () => {
                                 {/* Content */}
                                 <div className="relative z-10 space-y-3">
                                     <h3 className="text-xl font-bold text-gray-700 group-hover:text-gray-800 transition-colors duration-300 leading-tight">
-                                        {cat.name[language] || cat.name.en}
+                                        {cat?.name[language] }
                                     </h3>
                                     
                                     <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-gray-400 to-transparent mx-auto group-hover:via-blue-500 transition-colors duration-300"></div>
                                     
                                     <p className="text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 leading-relaxed">
-                                        {cat.slug[language] || cat.slug.en}
+                                        {cat?.slug?.[language]}
                                     </p>
                                 </div>
 

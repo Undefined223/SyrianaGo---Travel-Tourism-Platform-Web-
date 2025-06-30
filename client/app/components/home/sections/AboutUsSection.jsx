@@ -1,4 +1,10 @@
+'use client';
+
+import { useLanguage } from "@/app/contexts/LanguageContext";
+
 const AboutUsSection = () => {
+  const { t } = useLanguage(); 
+
   return (
     <section id="about" className="px-6 py-16 bg-gradient-to-br from-slate-50 via-white to-gray-50 relative overflow-hidden">
       {/* Background Elements */}
@@ -9,10 +15,10 @@ const AboutUsSection = () => {
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-12 ">
+        <div className="text-center mb-12">
           <div className="inline-block mb-4">
             <h2 className="text-4xl font-primary font-bold bg-gradient-to-r from-slate-800 via-gray-700 to-slate-800 bg-clip-text text-transparent mb-3" style={{ fontFamily: 'Tennyson BC' }}>
-              About Us
+              {t('about.title')}
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-green-600 via-white to-black mx-auto rounded-full"></div>
           </div>
@@ -33,19 +39,13 @@ const AboutUsSection = () => {
                   {/* Inner Shadow Ring */}
                   <div className="absolute inset-4 rounded-full bg-gradient-to-br from-gray-50 to-white shadow-inner border border-slate-100"></div>
                   
-                  {/* Logo Placeholder - Replace with your actual logo */}
+                  {/* Logo Placeholder */}
                   <div className="relative z-10 w-40 h-40 bg-gradient-to-br from-slate-100 to-gray-100 rounded-full flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-500">
-                    {/* Replace this div with your logo image */}
-                    {/* <div className="text-6xl font-bold text-slate-600">
-                      PH
-                    </div> */}
-                    {/* Uncomment and use this for actual logo: */}
                     <img
                       src="/assets/images/aboutLogo.png"
-                      alt="PlatformHub Logo"
+                      alt={t('about.logoAlt')}
                       className="w-32 h-32 object-contain"
                     />
-                   
                   </div>
                 </div>
 
@@ -60,7 +60,8 @@ const AboutUsSection = () => {
             {/* Company Name */}
             <div className="space-y-3">
               <h3 className="text-2xl font-bold text-slate-800 leading-tight" style={{ fontFamily: 'Tennyson BC' }}>
-                Platform<span className="text-slate-600">Hub</span>
+                {t('about.companyNamePart1')}
+                <span className="text-slate-600">{t('about.companyNamePart2')}</span>
               </h3>
               <div className="w-14 h-0.5 bg-gradient-to-r from-green-600 to-black"></div>
             </div>
@@ -68,15 +69,15 @@ const AboutUsSection = () => {
             {/* Main Description */}
             <div className="space-y-4">
               <p className="text-base text-gray-700 leading-relaxed font-medium">
-                PlatformHub is dedicated to bridging innovation and connectivity by offering personalized solutions for individuals and businesses.
+                {t('about.paragraph1')}
               </p>
               
               <p className="text-base text-gray-700 leading-relaxed">
-                Our mission is to empower growth, facilitate collaboration, and provide accessible platforms that cater to ever-evolving needs.
+                {t('about.paragraph2')}
               </p>
               
               <p className="text-base text-gray-700 leading-relaxed">
-                With a commitment to excellence, we strive to be the trusted name in delivering tailored experiences and fostering meaningful connections.
+                {t('about.paragraph3')}
               </p>
             </div>
 
@@ -86,32 +87,40 @@ const AboutUsSection = () => {
                 <div className="w-10 h-10 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
                   <div className="w-5 h-5 bg-green-600 rounded-full"></div>
                 </div>
-                <h4 className="font-semibold text-slate-800 mb-1 text-sm" style={{ fontFamily: 'Tennyson BC' }}>Innovation</h4>
-                <p className="text-xs text-gray-600">Bridging technology with creative solutions</p>
+                <h4 className="font-semibold text-slate-800 mb-1 text-sm" style={{ fontFamily: 'Tennyson BC' }}>
+                  {t('about.innovationTitle')}
+                </h4>
+                <p className="text-xs text-gray-600">{t('about.innovationDesc')}</p>
               </div>
 
               <div className="group p-4 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-slate-200">
                 <div className="w-10 h-10 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
                   <div className="w-5 h-5 bg-gray-700 rounded-full"></div>
                 </div>
-                <h4 className="font-semibold text-slate-800 mb-1 text-sm" style={{ fontFamily: 'Tennyson BC' }}>Connectivity</h4>
-                <p className="text-xs text-gray-600">Fostering meaningful connections</p>
+                <h4 className="font-semibold text-slate-800 mb-1 text-sm" style={{ fontFamily: 'Tennyson BC' }}>
+                  {t('about.connectivityTitle')}
+                </h4>
+                <p className="text-xs text-gray-600">{t('about.connectivityDesc')}</p>
               </div>
 
               <div className="group p-4 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-slate-200">
                 <div className="w-10 h-10 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
                   <div className="w-5 h-5 bg-green-600 rounded-full"></div>
                 </div>
-                <h4 className="font-semibold text-slate-800 mb-1 text-sm" style={{ fontFamily: 'Tennyson BC' }}>Growth</h4>
-                <p className="text-xs text-gray-600">Empowering personal and business development</p>
+                <h4 className="font-semibold text-slate-800 mb-1 text-sm" style={{ fontFamily: 'Tennyson BC' }}>
+                  {t('about.growthTitle')}
+                </h4>
+                <p className="text-xs text-gray-600">{t('about.growthDesc')}</p>
               </div>
 
               <div className="group p-4 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-slate-200">
                 <div className="w-10 h-10 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
                   <div className="w-5 h-5 bg-gray-700 rounded-full"></div>
                 </div>
-                <h4 className="font-semibold text-slate-800 mb-1 text-sm" style={{ fontFamily: 'Tennyson BC' }}>Excellence</h4>
-                <p className="text-xs text-gray-600">Commitment to quality and trust</p>
+                <h4 className="font-semibold text-slate-800 mb-1 text-sm" style={{ fontFamily: 'Tennyson BC' }}>
+                  {t('about.excellenceTitle')}
+                </h4>
+                <p className="text-xs text-gray-600">{t('about.excellenceDesc')}</p>
               </div>
             </div>
           </div>

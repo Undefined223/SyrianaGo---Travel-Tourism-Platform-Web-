@@ -67,8 +67,10 @@ const VendorCategories = () => {
       formData.append("icon", editCat.iconFile);
     }
 
+
     await updateCategory(catId, formData);
     setEditCatId(null);
+    setEditCat({ en: "", fr: "", ar: "", iconFile: null });
     const cats = await getAllCategories();
     setCategories(cats.data || cats);
   };
@@ -91,6 +93,7 @@ const VendorCategories = () => {
   const handleEditSubCategory = async (subId) => {
     await updateSubCategory(subId, { name: editSub });
     setEditSubId(null);
+    setEditSub({ en: "", fr: "", ar: "" });
     const subs = await getAllSubCategories();
     setSubcategories(subs.data || subs);
   };
@@ -249,112 +252,127 @@ const VendorCategories = () => {
         </div>
 
         {/* Categories Table */}
-         <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-        <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-4">
-          <h2 className="text-xl font-semibold text-white flex items-center">
-            <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-            </svg>
-            {t("dashboard.categoriesOverview") || "Categories Overview"}
-          </h2>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t("dashboard.categories")}</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t("category.icon") || "Icon"}</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t("common.subcategories")}</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t("dashboard.actions") || "Actions"}</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {Array.isArray(categories) && categories.map(cat => (
-                <tr key={cat._id} className="hover:bg-gray-50 transition-colors duration-150">
-                  {/* Category Name */}
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {editCatId === cat._id ? (
-                      <div className="grid grid-cols-1 gap-2">
-                        <div>
-                          <label className="block text-xs font-medium text-gray-500 mb-1">EN</label>
-                          <input
-                            type="text"
-                            value={editCat.en}
-                            onChange={e => setEditCat({ ...editCat, en: e.target.value })}
-                            className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder={t("category.nameEn") || "English"}
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs font-medium text-gray-500 mb-1">FR</label>
-                          <input
-                            type="text"
-                            value={editCat.fr}
-                            onChange={e => setEditCat({ ...editCat, fr: e.target.value })}
-                            className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder={t("category.nameFr") || "French"}
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs font-medium text-gray-500 mb-1">AR</label>
-                          <input
-                            type="text"
-                            value={editCat.ar}
-                            onChange={e => setEditCat({ ...editCat, ar: e.target.value })}
-                            className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder={t("category.nameAr") || "Arabic"}
-                            required
-                          />
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="space-y-1">
-                        <div className="flex items-center">
-                          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 mr-2">EN</span>
-                          <span className="text-sm font-medium text-gray-900">{cat.name?.en}</span>
-                        </div>
-                        <div className="flex items-center">
-                          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 mr-2">FR</span>
-                          <span className="text-sm text-gray-600">{cat.name?.fr}</span>
-                        </div>
-                        <div className="flex items-center">
-                          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 mr-2">AR</span>
-                          <span className="text-sm text-gray-600">{cat.name?.ar}</span>
-                        </div>
-                      </div>
-                    )}
-                  </td>
-                  
-                  {/* Icon Column - Fixed */}
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {editCatId === cat._id ? (
-                      <div className="space-y-2">
-                        <label className="block text-sm font-medium text-gray-700">
-                          {t("category.icon") || "Icon"}
-                        </label>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={e => setEditCat({
-                            ...editCat,
-                            iconFile: e.target.files[0]
-                          })}
-                          className="w-full border border-gray-300 rounded-lg px-4 py-2 file:mr-4 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all duration-200"
-                        />
-                        <div className="flex justify-center mt-2">
-                          {editCat.iconFile ? (
-                            <img 
-                              src={URL.createObjectURL(editCat.iconFile)} 
-                              alt="Preview" 
-                              className="h-12 w-12 rounded-lg object-cover border-2 border-gray-200" 
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+          <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-4">
+            <h2 className="text-xl font-semibold text-white flex items-center">
+              <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+              </svg>
+              {t("dashboard.categoriesOverview") || "Categories Overview"}
+            </h2>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t("dashboard.categories")}</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t("category.icon") || "Icon"}</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t("common.subcategories")}</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t("dashboard.actions") || "Actions"}</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {Array.isArray(categories) && categories.map(cat => (
+                  <tr key={cat._id} className="hover:bg-gray-50 transition-colors duration-150">
+                    {/* Category Name */}
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {editCatId === cat._id ? (
+                        <div className="grid grid-cols-1 gap-2">
+                          <div>
+                            <label className="block text-xs font-medium text-gray-500 mb-1">EN</label>
+                            <input
+                              type="text"
+                              value={editCat.en}
+                              onChange={e => setEditCat({ ...editCat, en: e.target.value })}
+                              className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder={t("category.nameEn") || "English"}
+                              required
                             />
-                          ) : cat.icon ? (
-                            <img 
-                              src={`${process.env.NEXT_PUBLIC_NO_API_URL}uploads/${cat.icon}`} 
-                              alt="Current" 
-                              className="h-12 w-12 rounded-lg object-cover border-2 border-gray-200" 
+                          </div>
+                          <div>
+                            <label className="block text-xs font-medium text-gray-500 mb-1">FR</label>
+                            <input
+                              type="text"
+                              value={editCat.fr}
+                              onChange={e => setEditCat({ ...editCat, fr: e.target.value })}
+                              className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder={t("category.nameFr") || "French"}
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs font-medium text-gray-500 mb-1">AR</label>
+                            <input
+                              type="text"
+                              value={editCat.ar}
+                              onChange={e => setEditCat({ ...editCat, ar: e.target.value })}
+                              className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder={t("category.nameAr") || "Arabic"}
+                              required
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="space-y-1">
+                          <div className="flex items-center">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 mr-2">EN</span>
+                            <span className="text-sm font-medium text-gray-900">{cat.name?.en}</span>
+                          </div>
+                          <div className="flex items-center">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 mr-2">FR</span>
+                            <span className="text-sm text-gray-600">{cat.name?.fr}</span>
+                          </div>
+                          <div className="flex items-center">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 mr-2">AR</span>
+                            <span className="text-sm text-gray-600">{cat.name?.ar}</span>
+                          </div>
+                        </div>
+                      )}
+                    </td>
+
+                    {/* Icon Column - Fixed */}
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {editCatId === cat._id ? (
+                        <div className="space-y-2">
+                          <label className="block text-sm font-medium text-gray-700">
+                            {t("category.icon") || "Icon"}
+                          </label>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={e => setEditCat({
+                              ...editCat,
+                              iconFile: e.target.files[0]
+                            })}
+                            className="w-full border border-gray-300 rounded-lg px-4 py-2 file:mr-4 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all duration-200"
+                          />
+                          <div className="flex justify-center mt-2">
+                            {editCat.iconFile ? (
+                              <img
+                                src={URL.createObjectURL(editCat.iconFile)}
+                                alt="Preview"
+                                className="h-12 w-12 rounded-lg object-cover border-2 border-gray-200"
+                              />
+                            ) : cat.icon ? (
+                              <img
+                                src={`${process.env.NEXT_PUBLIC_NO_API_URL}uploads/${cat.icon}`}
+                                alt="Current"
+                                className="h-12 w-12 rounded-lg object-cover border-2 border-gray-200"
+                              />
+                            ) : (
+                              <div className="h-12 w-12 bg-gray-200 border-2 border-dashed rounded-lg flex items-center justify-center">
+                                <span className="text-xs text-gray-500">No Icon</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex justify-center">
+                          {cat.icon ? (
+                            <img
+                              src={`${process.env.NEXT_PUBLIC_NO_API_URL}uploads/${cat.icon}`}
+                              alt="Category icon"
+                              className="h-12 w-12 rounded-lg object-cover border-2 border-gray-200"
                             />
                           ) : (
                             <div className="h-12 w-12 bg-gray-200 border-2 border-dashed rounded-lg flex items-center justify-center">
@@ -362,159 +380,150 @@ const VendorCategories = () => {
                             </div>
                           )}
                         </div>
-                      </div>
-                    ) : (
-                      <div className="flex justify-center">
-                        {cat.icon ? (
-                          <img 
-                            src={`${process.env.NEXT_PUBLIC_NO_API_URL}uploads/${cat.icon}`} 
-                            alt="Category icon" 
-                            className="h-12 w-12 rounded-lg object-cover border-2 border-gray-200" 
-                          />
-                        ) : (
-                          <div className="h-12 w-12 bg-gray-200 border-2 border-dashed rounded-lg flex items-center justify-center">
-                            <span className="text-xs text-gray-500">No Icon</span>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </td>
-                  
-                  {/* Subcategories Column */}
-                  <td className="px-6 py-4">
-                    <div className="space-y-2">
-                      {subcategories
-                        .filter(sub => Array.isArray(cat.subCategory) && cat.subCategory.includes(sub._id))
-                        .map(sub =>
-                          editSubId === sub._id ? (
-                            <div key={sub._id} className="bg-gray-50 p-3 rounded-lg border">
-                              <div className="grid grid-cols-1 gap-2">
-                                <div>
-                                  <label className="block text-xs font-medium text-gray-500 mb-1">EN</label>
-                                  <input
-                                    type="text"
-                                    value={editSub.en}
-                                    onChange={e => setEditSub({ ...editSub, en: e.target.value })}
-                                    className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    placeholder={t("category.nameEn") || "English"}
-                                    required
-                                  />
-                                </div>
-                                <div>
-                                  <label className="block text-xs font-medium text-gray-500 mb-1">FR</label>
-                                  <input
-                                    type="text"
-                                    value={editSub.fr}
-                                    onChange={e => setEditSub({ ...editSub, fr: e.target.value })}
-                                    className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    placeholder={t("category.nameFr") || "French"}
-                                    required
-                                  />
-                                </div>
-                                <div>
-                                  <label className="block text-xs font-medium text-gray-500 mb-1">AR</label>
-                                  <input
-                                    type="text"
-                                    value={editSub.ar}
-                                    onChange={e => setEditSub({ ...editSub, ar: e.target.value })}
-                                    className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    placeholder={t("category.nameAr") || "Arabic"}
-                                    required
-                                  />
-                                </div>
-                                <div className="flex space-x-2 pt-2">
-                                  <button
-                                    className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-md text-sm font-medium transition-colors duration-200"
-                                    onClick={() => handleEditSubCategory(sub._id)}
-                                  >
-                                    {t("booking.save") || "Save"}
-                                  </button>
-                                  <button
-                                    className="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded-md text-sm font-medium transition-colors duration-200"
-                                    onClick={() => setEditSubId(null)}
-                                  >
-                                    {t("booking.cancel") || "Cancel"}
-                                  </button>
+                      )}
+                    </td>
+
+                    {/* Subcategories Column */}
+                    <td className="px-6 py-4">
+                      <div className="space-y-2">
+                        {subcategories
+                          .filter(sub => Array.isArray(cat.subCategory) && cat.subCategory.includes(sub._id))
+                          .map(sub =>
+                            editSubId === sub._id ? (
+                              <div key={sub._id} className="bg-gray-50 p-3 rounded-lg border">
+                                <div className="grid grid-cols-1 gap-2">
+                                  <div>
+                                    <label className="block text-xs font-medium text-gray-500 mb-1">EN</label>
+                                    <input
+                                      type="text"
+                                      value={editSub.en}
+                                      onChange={e => setEditSub({ ...editSub, en: e.target.value })}
+                                      className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                      placeholder={t("category.nameEn") || "English"}
+                                      required
+                                    />
+                                  </div>
+                                  <div>
+                                    <label className="block text-xs font-medium text-gray-500 mb-1">FR</label>
+                                    <input
+                                      type="text"
+                                      value={editSub.fr}
+                                      onChange={e => setEditSub({ ...editSub, fr: e.target.value })}
+                                      className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                      placeholder={t("category.nameFr") || "French"}
+                                      required
+                                    />
+                                  </div>
+                                  <div>
+                                    <label className="block text-xs font-medium text-gray-500 mb-1">AR</label>
+                                    <input
+                                      type="text"
+                                      value={editSub.ar}
+                                      onChange={e => setEditSub({ ...editSub, ar: e.target.value })}
+                                      className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                      placeholder={t("category.nameAr") || "Arabic"}
+                                      required
+                                    />
+                                  </div>
+                                  <div className="flex space-x-2 pt-2">
+                                    <button
+                                      className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-md text-sm font-medium transition-colors duration-200"
+                                      onClick={() => handleEditSubCategory(sub._id)}
+                                    >
+                                      {t("common.save") || "Save"}
+                                    </button>
+                                    <button
+                                      className="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded-md text-sm font-medium transition-colors duration-200"
+                                      onClick={() => {
+                                        setEditSubId(null);
+                                        setEditSub({ en: "", fr: "", ar: "" });
+                                      }}
+                                    >
+                                      {t("common.cancel") || "Cancel"}
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          ) : (
-                            <div key={sub._id} className="bg-gray-50 p-3 rounded-lg border hover:bg-gray-100 transition-colors duration-150">
-                              <div className="space-y-1">
-                                <div className="flex items-center">
-                                  <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 mr-2">EN</span>
-                                  <span className="text-sm text-gray-900">{sub.name?.en}</span>
+                            ) : (
+                              <div key={sub._id} className="bg-gray-50 p-3 rounded-lg border hover:bg-gray-100 transition-colors duration-150">
+                                <div className="space-y-1">
+                                  <div className="flex items-center">
+                                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 mr-2">EN</span>
+                                    <span className="text-sm text-gray-900">{sub.name?.en}</span>
+                                  </div>
+                                  <div className="flex items-center">
+                                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 mr-2">FR</span>
+                                    <span className="text-sm text-gray-600">{sub.name?.fr}</span>
+                                  </div>
+                                  <div className="flex items-center">
+                                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 mr-2">AR</span>
+                                    <span className="text-sm text-gray-600">{sub.name?.ar}</span>
+                                  </div>
                                 </div>
-                                <div className="flex items-center">
-                                  <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 mr-2">FR</span>
-                                  <span className="text-sm text-gray-600">{sub.name?.fr}</span>
-                                </div>
-                                <div className="flex items-center">
-                                  <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 mr-2">AR</span>
-                                  <span className="text-sm text-gray-600">{sub.name?.ar}</span>
-                                </div>
+                                <button
+                                  className="mt-2 text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors duration-200"
+                                  onClick={() => {
+                                    setEditSubId(sub._id);
+                                    setEditSub({
+                                      en: sub.name?.en || "",
+                                      fr: sub.name?.fr || "",
+                                      ar: sub.name?.ar || "",
+                                    });
+                                  }}
+                                >
+                                  {t("common.edit") || "Edit"}
+                                </button>
                               </div>
-                              <button
-                                className="mt-2 text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors duration-200"
-                                onClick={() => {
-                                  setEditSubId(sub._id);
-                                  setEditSub({
-                                    en: sub.name?.en || "",
-                                    fr: sub.name?.fr || "",
-                                    ar: sub.name?.ar || "",
-                                  });
-                                }}
-                              >
-                                {t("booking.save") || "Edit"}
-                              </button>
-                            </div>
-                          )
-                        )}
-                    </div>
-                  </td>
-                  
-                  {/* Actions Column */}
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    {editCatId === cat._id ? (
-                      <div className="flex flex-col space-y-2">
-                        <button
-                          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md"
-                          onClick={() => handleEditCategory(cat._id)}
-                        >
-                          {t("booking.save") || "Save"}
-                        </button>
-                        <button
-                          className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md"
-                          onClick={() => setEditCatId(null)}
-                        >
-                          {t("booking.cancel") || "Cancel"}
-                        </button>
+                            )
+                          )}
                       </div>
-                    ) : (
-                      <button
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md"
-                        onClick={() => {
-                          setEditCatId(cat._id);
-                          setEditCat({
-                            en: cat.name?.en || "",
-                            fr: cat.name?.fr || "",
-                            ar: cat.name?.ar || "",
-                            iconFile: null
-                          });
-                        }}
-                      >
-                        {t("booking.save") || "Edit"}
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                    </td>
+
+                    {/* Actions Column */}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      {editCatId === cat._id ? (
+                        <div className="flex flex-col space-y-2">
+                          <button
+                            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md"
+                            onClick={() => handleEditCategory(cat._id)}
+                          >
+                            {t("common.save") || "Save"}
+                          </button>
+                          <button
+                            className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md"
+                            onClick={() => {
+                              setEditCatId(null);
+                              setEditCat({ en: "", fr: "", ar: "", iconFile: null });
+                            }}
+                          >
+                            {t("common.cancel") || "Cancel"}
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md"
+                          onClick={() => {
+                            setEditCatId(cat._id);
+                            setEditCat({
+                              en: cat.name?.en || "",
+                              fr: cat.name?.fr || "",
+                              ar: cat.name?.ar || "",
+                              iconFile: null
+                            });
+                          }}
+                        >
+                          {t("common.edit") || "Edit"}
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   );
 };
 

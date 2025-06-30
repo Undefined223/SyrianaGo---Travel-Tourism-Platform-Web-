@@ -16,7 +16,7 @@ services:
       JWT_SECRET: JFAINV
       REFRESH_SECRET: FEAFEA
       ACCESS_SECRET: AFAFASS
-      MONGO_URL: mongodb://127.0.0.1:27017/booking
+      MONGO_URL: mongodb://host.docker:27017/booking
       FRONTEND_URL: http://localhost:3000
       APP_USER: tuniweeb@gmail.com
       APP_PASS: evmp yipc otbf tyol

@@ -15,7 +15,63 @@
     "english": "Anglais",
     "french": "Français",
     "arabic": "العربية",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "syrianaGo": "SyrianaGo",
+    "videoNotSupported": "Votre navigateur ne prend pas en charge les vidéos.",
+    "save": "Enregistrer",
+    "edit": "Modifier",
+    "actions": "Actions"
+  },
+  "home": {
+    "tagline": "Où les souvenirs grandissent"
+  },
+  "promotion": {
+    "title": "Libérez Votre Potentiel",
+    "subtitle": "Améliorer les expériences grâce à une connectivité transparente"
+  },
+  "testimonials": {
+    "title": "TÉMOIGNAGES",
+    "prevTestimonial": "Témoignage précédent",
+    "nextTestimonial": "Témoignage suivant"
+  },
+  "partners": {
+    "title": "PARTENAIRES ET SPONSORS",
+    "logoAlt": "Logo partenaire #{number}"
+  },
+  "team": {
+    "title": "ÉQUIPE"
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Vous avez des questions ou souhaitez travailler avec nous? Remplissez le formulaire ci-dessous!",
+    "nameLabel": "Nom",
+    "namePlaceholder": "Votre nom",
+    "emailLabel": "Email",
+    "emailPlaceholder": "vous@exemple.com",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tapez votre message...",
+    "submitButton": "Envoyer le message"
+  },
+  "pwa": {
+    "installButtonText": "Ajouter à l'écran d'accueil",
+    "installButtonAria": "Installer l'application"
+  },
+  "about": {
+    "title": "À Propos",
+    "logoAlt": "Logo PlatformHub",
+    "companyNamePart1": "Platform",
+    "companyNamePart2": "Hub",
+    "paragraph1": "PlatformHub s'engage à combler l'innovation et la connectivité en proposant des solutions personnalisées pour les particuliers et les entreprises.",
+    "paragraph2": "Notre mission est de favoriser la croissance, de faciliter la collaboration et de fournir des plateformes accessibles qui répondent aux besoins en constante évolution.",
+    "paragraph3": "Avec un engagement envers l'excellence, nous nous efforçons d'être le nom de confiance dans la fourniture d'expériences sur mesure et la création de liens significatifs.",
+    "innovationTitle": "Innovation",
+    "innovationDesc": "Relier la technologie à des solutions créatives",
+    "connectivityTitle": "Connectivité",
+    "connectivityDesc": "Favoriser des connexions significatives",
+    "growthTitle": "Croissance",
+    "growthDesc": "Permettre le développement personnel et professionnel",
+    "excellenceTitle": "Excellence",
+    "excellenceDesc": "Engagement envers la qualité et la confiance"
   },
   "category": {
     "loadingTitle": "Chargement des annonces de la catégorie",
@@ -149,6 +205,7 @@
     "admin": "Administrateur",
     "vendor": "Vendeur",
     "user": "Utilisateur",
+    "role": "Rôle",
     "enable2fa": "Activer la 2FA",
     "disable2fa": "Désactiver la 2FA",
     "2faError": "Échec de l'activation/désactivation de la 2FA",
@@ -252,7 +309,11 @@
     "analyticsSubtitle": "Surveillez les performances de votre plateforme avec des analyses en temps réel et des métriques complètes",
     "realtimeData": "Données en temps réel",
     "performanceTracking": "Suivi des performances",
-    "growthFromLastMonth": "Croissance depuis le mois dernier"
+    "growthFromLastMonth": "Croissance depuis le mois dernier",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+    "errorDeletingUser": "Échec de la suppression de l'utilisateur",
+    "errorUpdatingUser": "Échec de la mise à jour de l'utilisateur",
+    "users": "Utilisateurs"
   },
   "activity": {
     "addedToWishlist": "Ajouté '{title}' à la liste de souhaits",

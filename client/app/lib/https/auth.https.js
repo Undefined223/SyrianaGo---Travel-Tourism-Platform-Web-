@@ -106,6 +106,20 @@ const updateUser = async (data) => {
   }
 };
 
+ const getAllUsers = async () => {
+  const res = await axiosInstance.get("/auth/admin/users");
+  return res.data;
+};
+
+ const deleteUserById = async (id) => {
+  const res = await axiosInstance.delete(`/auth/admin/users/${id}`);
+  return res.data;
+};
+
+ const updateUserByAdmin = async (userId, data) => {
+  const res = await axiosInstance.put(`/auth/admin/users/${userId}`, data);
+  return res.data;
+};
 
 export {
   login,
@@ -120,5 +134,8 @@ export {
   getUserBookings,
   getCurrentUser,
   getUserRecentActivities,
-  updateUser
+  updateUser,
+  getAllUsers,
+  deleteUserById,
+  updateUserByAdmin
 };

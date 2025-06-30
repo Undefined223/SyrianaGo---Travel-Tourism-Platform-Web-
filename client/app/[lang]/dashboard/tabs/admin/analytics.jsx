@@ -141,94 +141,94 @@ export default function AdminAnalytics() {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 px-2 sm:px-0">
           {/* Total Users Card */}
-          <div className="group relative overflow-hidden bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl shadow-2xl shadow-blue-500/30 hover:shadow-3xl hover:shadow-blue-500/50 transition-all duration-500 hover:-translate-y-2 hover:scale-105">
+          <div className="group relative overflow-hidden bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl sm:rounded-3xl shadow-2xl shadow-blue-500/30 hover:shadow-3xl hover:shadow-blue-500/50 transition-all duration-500 hover:-translate-y-1 sm:hover:-translate-y-2 hover:scale-105">
             <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5"></div>
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-            <div className="relative p-8 text-white">
-              <div className="flex items-center justify-between mb-6">
-                <div className="p-4 bg-white/25 rounded-2xl backdrop-blur-md shadow-xl">
-                  <Users className="w-10 h-10" />
+            <div className="absolute -top-6 sm:-top-10 -right-6 sm:-right-10 w-20 h-20 sm:w-32 sm:h-32 bg-white/10 rounded-full blur-2xl"></div>
+            <div className="relative p-4 sm:p-6 lg:p-8 text-white">
+              <div className="flex items-center justify-between mb-4 sm:mb-6">
+                <div className="p-2 sm:p-3 lg:p-4 bg-white/25 rounded-xl sm:rounded-2xl backdrop-blur-md shadow-xl">
+                  <Users className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />
                 </div>
-                <div className="flex items-center space-x-2 bg-white/20 rounded-full px-3 py-1 backdrop-blur-md">
-                  <TrendingUp className="w-4 h-4" />
+                <div className="flex items-center space-x-1 sm:space-x-2 bg-white/20 rounded-full px-2 sm:px-3 py-1 backdrop-blur-md">
+                  <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span className="text-xs font-semibold">+12%</span>
                 </div>
               </div>
-              <div className="space-y-2">
-                <div className="text-4xl font-bold tracking-tight">{analytics.totalUsers?.toLocaleString() ?? "--"}</div>
-                <div className="text-blue-100 text-lg font-semibold">{t("dashboard.totalUsers")}</div>
-                <div className="text-sm text-blue-200 bg-white/10 rounded-full px-3 py-1 inline-block">
+              <div className="space-y-1 sm:space-y-2">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">{analytics.totalUsers?.toLocaleString() ?? "--"}</div>
+                <div className="text-blue-100 text-sm sm:text-base lg:text-lg font-semibold">{t("dashboard.totalUsers")}</div>
+                <div className="text-xs sm:text-sm text-blue-200 bg-white/10 rounded-full px-2 sm:px-3 py-1 inline-block">
                   {t("dashboard.growthFromLastMonth") || "Growth from last month"}
                 </div>
               </div>
             </div>
           </div>
           {/* Total Listings Card */}
-          <div className="group relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl shadow-2xl shadow-emerald-500/30 hover:shadow-3xl hover:shadow-emerald-500/50 transition-all duration-500 hover:-translate-y-2 hover:scale-105">
+          <div className="group relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl sm:rounded-3xl shadow-2xl shadow-emerald-500/30 hover:shadow-3xl hover:shadow-emerald-500/50 transition-all duration-500 hover:-translate-y-1 sm:hover:-translate-y-2 hover:scale-105">
             <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5"></div>
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-            <div className="relative p-8 text-white">
-              <div className="flex items-center justify-between mb-6">
-                <div className="p-4 bg-white/25 rounded-2xl backdrop-blur-md shadow-xl">
-                  <Home className="w-10 h-10" />
+            <div className="absolute -top-6 sm:-top-10 -right-6 sm:-right-10 w-20 h-20 sm:w-32 sm:h-32 bg-white/10 rounded-full blur-2xl"></div>
+            <div className="relative p-4 sm:p-6 lg:p-8 text-white">
+              <div className="flex items-center justify-between mb-4 sm:mb-6">
+                <div className="p-2 sm:p-3 lg:p-4 bg-white/25 rounded-xl sm:rounded-2xl backdrop-blur-md shadow-xl">
+                  <Home className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />
                 </div>
-                <div className="flex items-center space-x-2 bg-white/20 rounded-full px-3 py-1 backdrop-blur-md">
-                  <TrendingUp className="w-4 h-4" />
+                <div className="flex items-center space-x-1 sm:space-x-2 bg-white/20 rounded-full px-2 sm:px-3 py-1 backdrop-blur-md">
+                  <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span className="text-xs font-semibold">+8%</span>
                 </div>
               </div>
-              <div className="space-y-2">
-                <div className="text-4xl font-bold tracking-tight">{analytics.totalListings?.toLocaleString() ?? "--"}</div>
-                <div className="text-emerald-100 text-lg font-semibold">{t("dashboard.totalListings")}</div>
-                <div className="text-sm text-emerald-200 bg-white/10 rounded-full px-3 py-1 inline-block">
+              <div className="space-y-1 sm:space-y-2">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">{analytics.totalListings?.toLocaleString() ?? "--"}</div>
+                <div className="text-emerald-100 text-sm sm:text-base lg:text-lg font-semibold">{t("dashboard.totalListings")}</div>
+                <div className="text-xs sm:text-sm text-emerald-200 bg-white/10 rounded-full px-2 sm:px-3 py-1 inline-block">
                   {t("dashboard.growthFromLastMonth") || "Growth from last month"}
                 </div>
               </div>
             </div>
           </div>
           {/* Total Bookings Card */}
-          <div className="group relative overflow-hidden bg-gradient-to-br from-amber-500 to-orange-600 rounded-3xl shadow-2xl shadow-amber-500/30 hover:shadow-3xl hover:shadow-amber-500/50 transition-all duration-500 hover:-translate-y-2 hover:scale-105">
+          <div className="group relative overflow-hidden bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl sm:rounded-3xl shadow-2xl shadow-amber-500/30 hover:shadow-3xl hover:shadow-amber-500/50 transition-all duration-500 hover:-translate-y-1 sm:hover:-translate-y-2 hover:scale-105">
             <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5"></div>
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-            <div className="relative p-8 text-white">
-              <div className="flex items-center justify-between mb-6">
-                <div className="p-4 bg-white/25 rounded-2xl backdrop-blur-md shadow-xl">
-                  <Calendar className="w-10 h-10" />
+            <div className="absolute -top-6 sm:-top-10 -right-6 sm:-right-10 w-20 h-20 sm:w-32 sm:h-32 bg-white/10 rounded-full blur-2xl"></div>
+            <div className="relative p-4 sm:p-6 lg:p-8 text-white">
+              <div className="flex items-center justify-between mb-4 sm:mb-6">
+                <div className="p-2 sm:p-3 lg:p-4 bg-white/25 rounded-xl sm:rounded-2xl backdrop-blur-md shadow-xl">
+                  <Calendar className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />
                 </div>
-                <div className="flex items-center space-x-2 bg-white/20 rounded-full px-3 py-1 backdrop-blur-md">
-                  <TrendingUp className="w-4 h-4" />
+                <div className="flex items-center space-x-1 sm:space-x-2 bg-white/20 rounded-full px-2 sm:px-3 py-1 backdrop-blur-md">
+                  <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span className="text-xs font-semibold">+24%</span>
                 </div>
               </div>
-              <div className="space-y-2">
-                <div className="text-4xl font-bold tracking-tight">{analytics.totalBookings?.toLocaleString() ?? "--"}</div>
-                <div className="text-amber-100 text-lg font-semibold">{t("dashboard.totalBookings")}</div>
-                <div className="text-sm text-amber-200 bg-white/10 rounded-full px-3 py-1 inline-block">
+              <div className="space-y-1 sm:space-y-2">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">{analytics.totalBookings?.toLocaleString() ?? "--"}</div>
+                <div className="text-amber-100 text-sm sm:text-base lg:text-lg font-semibold">{t("dashboard.totalBookings")}</div>
+                <div className="text-xs sm:text-sm text-amber-200 bg-white/10 rounded-full px-2 sm:px-3 py-1 inline-block">
                   {t("dashboard.growthFromLastMonth") || "Growth from last month"}
                 </div>
               </div>
             </div>
           </div>
           {/* Total Revenue Card */}
-          <div className="group relative overflow-hidden bg-gradient-to-br from-purple-500 to-pink-600 rounded-3xl shadow-2xl shadow-purple-500/30 hover:shadow-3xl hover:shadow-purple-500/50 transition-all duration-500 hover:-translate-y-2 hover:scale-105">
+          <div className="group relative overflow-hidden bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl sm:rounded-3xl shadow-2xl shadow-purple-500/30 hover:shadow-3xl hover:shadow-purple-500/50 transition-all duration-500 hover:-translate-y-1 sm:hover:-translate-y-2 hover:scale-105">
             <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5"></div>
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-            <div className="relative p-8 text-white">
-              <div className="flex items-center justify-between mb-6">
-                <div className="p-4 bg-white/25 rounded-2xl backdrop-blur-md shadow-xl">
-                  <DollarSign className="w-10 h-10" />
+            <div className="absolute -top-6 sm:-top-10 -right-6 sm:-right-10 w-20 h-20 sm:w-32 sm:h-32 bg-white/10 rounded-full blur-2xl"></div>
+            <div className="relative p-4 sm:p-6 lg:p-8 text-white">
+              <div className="flex items-center justify-between mb-4 sm:mb-6">
+                <div className="p-2 sm:p-3 lg:p-4 bg-white/25 rounded-xl sm:rounded-2xl backdrop-blur-md shadow-xl">
+                  <DollarSign className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />
                 </div>
-                <div className="flex items-center space-x-2 bg-white/20 rounded-full px-3 py-1 backdrop-blur-md">
-                  <TrendingUp className="w-4 h-4" />
+                <div className="flex items-center space-x-1 sm:space-x-2 bg-white/20 rounded-full px-2 sm:px-3 py-1 backdrop-blur-md">
+                  <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span className="text-xs font-semibold">+18%</span>
                 </div>
               </div>
-              <div className="space-y-2">
-                <div className="text-4xl font-bold tracking-tight">{analytics.totalRevenue ?? "--"}</div>
-                <div className="text-purple-100 text-lg font-semibold">{t("dashboard.revenue")}</div>
-                <div className="text-sm text-purple-200 bg-white/10 rounded-full px-3 py-1 inline-block">
+              <div className="space-y-1 sm:space-y-2">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">{analytics.totalRevenue ?? "--"}</div>
+                <div className="text-purple-100 text-sm sm:text-base lg:text-lg font-semibold">{t("dashboard.revenue")}</div>
+                <div className="text-xs sm:text-sm text-purple-200 bg-white/10 rounded-full px-2 sm:px-3 py-1 inline-block">
                   {t("dashboard.growthFromLastMonth") || "Growth from last month"}
                 </div>
               </div>

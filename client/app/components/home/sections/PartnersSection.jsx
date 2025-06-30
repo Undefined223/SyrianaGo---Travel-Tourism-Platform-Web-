@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '@/app/contexts/LanguageContext';
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
@@ -12,7 +13,6 @@ const logos = [
   '/assets/images/partners/barberShop.png',
   '/assets/images/partners/open.png',
   '/assets/images/partners/nextstar.png',
-
 ];
 
 // Duplicate logos to simulate infinite scroll
@@ -22,6 +22,7 @@ const PartnersSlider = () => {
   const sliderRef = useRef(null);
   const controls = useAnimation();
   const [xPosition, setXPosition] = useState(0);
+  const { t } = useLanguage(); // Get translation function
 
   // Infinite scroll loop
   useEffect(() => {
@@ -41,8 +42,8 @@ const PartnersSlider = () => {
   }, []);
 
   return (
-    <section className="py-16 bg-[#101c23] text-white text-center">
-      <h2 className="text-3xl font-bold mb-2">PARTNERS & SPONSORS</h2>
+    <section id="partners" className="py-16 bg-[#101c23] text-white text-center">
+      <h2 className="text-3xl font-bold mb-2">{t('partners.title')}</h2>
       <div className="w-12 h-1 bg-white mx-auto mb-10" />
 
       <div className="overflow-hidden max-w-7xl mx-auto">
@@ -55,11 +56,11 @@ const PartnersSlider = () => {
           {infiniteLogos.map((logo, i) => (
             <div
               key={i}
-              className="min-w-[200px] h-[120px]  rounded-xl shadow-md flex items-center justify-center p-4"
+              className="min-w-[200px] h-[120px] rounded-xl shadow-md flex items-center justify-center p-4"
             >
               <img
                 src={logo}
-                alt={`logo-${i}`}
+                alt={t('partners.logoAlt', { number: i + 1 })}
                 className="h-full object-contain"
               />
             </div>

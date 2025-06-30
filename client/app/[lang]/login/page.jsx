@@ -7,7 +7,7 @@ import { useUser } from "@/app/contexts/UserContext";
 import { loginWithGoogle, verify2FA } from "@/app/lib/https/auth.https";
 
 export default function LoginPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -223,7 +223,7 @@ export default function LoginPage() {
             {/* Signup Link */}
             <p className="mt-6 text-center text-gray-600 text-sm">
               {t("login.noAccount")}{" "}
-              <a href="/auth/register" className="text-blue-600 hover:text-blue-500 font-medium">
+              <a href={`/${language}/auth/register`} className="text-blue-600 hover:text-blue-500 font-medium">
                 {t("login.signUp")}
               </a>
             </p>

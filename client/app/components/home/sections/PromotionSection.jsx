@@ -1,4 +1,10 @@
+'use client';
+
+import { useLanguage } from "@/app/contexts/LanguageContext";
+
 const PromotionSection = () => {
+  const { t } = useLanguage(); // Get translation function
+
   return (
     <section id="promotion" className="relative h-[75vh] w-full overflow-hidden">
       {/* Background Video */}
@@ -10,7 +16,7 @@ const PromotionSection = () => {
         playsInline
       >
         <source src="https://cdn-media.f-static.net/uploads/10845266/normal_pb-683c94db91966.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
+        {t('common.videoNotSupported')}
       </video>
 
       {/* Shadow Overlay (left to right fade) */}
@@ -20,10 +26,10 @@ const PromotionSection = () => {
       <div className="relative z-20 flex items-center h-full px-6 md:px-20">
         <div>
           <h2 className="text-white text-4xl md:text-6xl font-extrabold mb-4 underline decoration-green-400 underline-offset-8">
-            Unleash Your Potential
+            {t('promotion.title')}
           </h2>
           <p className="text-white text-lg md:text-2xl max-w-xl underline decoration-white/50 underline-offset-4">
-            Elevating experiences through seamless connectivity
+            {t('promotion.subtitle')}
           </p>
         </div>
       </div>

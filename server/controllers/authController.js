@@ -323,4 +323,38 @@ const getUserRecentActivities = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch recent activities" });
   }
 };
-module.exports = { login, register,updateMe, getCurrentUser, getUserRecentActivities, googleCallback, refreshToken, getUserBookings, addToWishlist, removeFromWishlist, getWishlist, verify2FA, toggle2FA };
+
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find().select("-password -twoFactorCode -twoFactorCodeExpires");
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to get users" });
+  }
+};
+
+const deleteUserById = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.userId);
+    res.json({ message: "User deleted" });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to delete user" });
+  }
+};
+
+const updateUserByAdmin = async (req, res) => {
+  const { name, role, email } = req.body;
+  const user = await User.findById(req.params.userId);
+  if (!user) return res.status(404).json({ message: "User not found" });
+
+  if (name) user.name = name;
+  if (role) user.role = role;
+  if (email) user.email = email;
+
+
+  await user.save();
+  res.json({ message: "User updated" });
+};
+
+
+module.exports = { login, register,updateMe, getCurrentUser, getUserRecentActivities, googleCallback, refreshToken, getUserBookings, addToWishlist, removeFromWishlist, getWishlist, verify2FA, toggle2FA, getAllUsers, deleteUserById, updateUserByAdmin };

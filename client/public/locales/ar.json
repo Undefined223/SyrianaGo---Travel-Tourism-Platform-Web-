@@ -15,7 +15,63 @@
     "english": "الإنجليزية",
     "french": "الفرنسية",
     "arabic": "العربية",
-    "cancel": "إلغاء"
+    "cancel": "إلغاء",
+    "syrianaGo": "SyrianaGo",
+    "videoNotSupported": "متصفحك لا يدعم تشغيل الفيديو.",
+    "save": "حفظ",
+    "edit": "تعديل",
+     "actions": "الإجراءات"
+  },
+  "home": {
+    "tagline": "حيث تنمو الذكريات"
+  },
+  "promotion": {
+    "title": "أطلق العنان لإمكانياتك",
+    "subtitle": "رفع مستوى التجارب من خلال الاتصال السلس"
+  },
+  "testimonials": {
+    "title": "الشهادات",
+    "prevTestimonial": "الشهادة السابقة",
+    "nextTestimonial": "الشهادة التالية"
+  },
+  "partners": {
+    "title": "الشركاء والرعاة",
+    "logoAlt": "شعار الشريك #{number}"
+  },
+  "team": {
+    "title": "الفريق"
+  },
+  "contact": {
+    "title": "اتصل بنا",
+    "subtitle": "هل لديك أي أسئلة أو ترغب في العمل معنا؟ املأ النموذج أدناه!",
+    "nameLabel": "الاسم",
+    "namePlaceholder": "اسمك",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "you@example.com",
+    "messageLabel": "الرسالة",
+    "messagePlaceholder": "اكتب رسالتك...",
+    "submitButton": "إرسال الرسالة"
+  },
+  "pwa": {
+    "installButtonText": "إضافة إلى الشاشة الرئيسية",
+    "installButtonAria": "تثبيت التطبيق"
+  },
+  "about": {
+    "title": "معلومات عنا",
+    "logoAlt": "شعار PlatformHub",
+    "companyNamePart1": "Platform",
+    "companyNamePart2": "Hub",
+    "paragraph1": "تلتزم PlatformHub بربط الابتكار والتواصل من خلال تقديم حلول مخصصة للأفراد والشركات.",
+    "paragraph2": "مهمتنا هي تمكين النمو، وتيسير التعاون، وتقديم منصات سهلة الوصول تلبي الاحتياجات المتطورة باستمرار.",
+    "paragraph3": "مع التزامنا بالتميز، نسعى جاهدين لنكون الاسم الموثوق في تقديم تجارب مخصصة وتعزيز الروابط الهادفة.",
+    "innovationTitle": "الابتكار",
+    "innovationDesc": "ربط التكنولوجيا بحلول إبداعية",
+    "connectivityTitle": "الاتصال",
+    "connectivityDesc": "تعزيز الروابط الهادفة",
+    "growthTitle": "النمو",
+    "growthDesc": "تمكين التنمية الشخصية والمهنية",
+    "excellenceTitle": "التميز",
+    "excellenceDesc": "التزام بالجودة والثقة"
   },
   "category": {
     "loadingTitle": "جاري تحميل قوائم الفئة",
@@ -137,7 +193,8 @@
     "markAsConfirmed": "تعيين كمؤكد",
     "markAsPending": "تعيين كقيد الانتظار",
     "markAsCancelled": "تعيين كملغي",
-    "deleteBooking": "حذف الحجز"
+    "deleteBooking": "حذف الحجز",
+    "role": "الدور"
   },
   "user": {
     "profile": "الملف الشخصي",
@@ -252,7 +309,11 @@
     "analyticsSubtitle": "راقب أداء منصتك مع تحليلات فورية وبيانات شاملة",
     "realtimeData": "بيانات فورية",
     "performanceTracking": "متابعة الأداء",
-    "growthFromLastMonth": "النمو منذ الشهر الماضي"
+    "growthFromLastMonth": "النمو منذ الشهر الماضي",
+    "confirmDelete": "هل أنت متأكد أنك تريد حذف هذا المستخدم؟",
+    "errorDeletingUser": "فشل حذف المستخدم",
+    "errorUpdatingUser": "فشل تحديث المستخدم",
+    "users": "المستخدمين"
   },
   "activity": {
     "addedToWishlist": "تمت إضافة '{title}' إلى المفضلة",

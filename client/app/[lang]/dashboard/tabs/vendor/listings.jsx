@@ -1,8 +1,9 @@
 "use client";
-import { getVendorListings, createListing, updateListing } from "@/app/lib/https/listing.https";
+import { getVendorListings, createListing, updateListing, getAllListings } from "@/app/lib/https/listing.https";
 import React, { useEffect, useState, useRef } from "react";
 import LocationFinder from "@/app/components/LocationFinder";
 import { useLanguage } from "@/app/contexts/LanguageContext";
+import { getAllSubCategories } from "@/app/lib/https/subcat.https";
 
 const initialForm = {
   name: { en: "", fr: "", ar: "" },
@@ -16,7 +17,7 @@ const initialForm = {
 };
 
 const VendorListings = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -26,6 +27,8 @@ const VendorListings = () => {
   const [showLocationPopup, setShowLocationPopup] = useState(false);
   const locationBtnRef = useRef();
   const locationPopupRef = useRef();
+  const [subcategories, setSubcategories] = useState([]);
+  const [subcategoriesLoading, setSubcategoriesLoading] = useState(false);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -63,11 +66,28 @@ const VendorListings = () => {
   useEffect(() => {
     fetchListings();
   }, []);
+  const fetchSubcategories = async () => {
+    setSubcategoriesLoading(true);
+    try {
+      const response = await getAllSubCategories();
+      setSubcategories(response);
+    } catch (error) {
+      console.error("Failed to fetch subcategories:", error);
+      setSubcategories([]);
+    } finally {
+      setSubcategoriesLoading(false);
+    }
+  };
+  useEffect(() => {
+    if (showForm) {
+      fetchSubcategories();
+    }
+  }, [showForm]);
 
   const fetchListings = async () => {
     setLoading(true);
     try {
-      const data = await getVendorListings();
+      const { data } = await getVendorListings();
       setListings(data);
     } catch {
       setListings([]);
@@ -473,14 +493,24 @@ const VendorListings = () => {
                     <h4 className="font-semibold text-slate-900 mb-3">{t("listings.additionalSettings")}</h4>
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-2">{t("listings.subcategory")}</label>
-                        <input
-                          type="text"
+                        <label className="block text-sm font-medium text-slate-700 mb-2">SubCategory</label>
+                        <select
                           value={form.subcategory}
                           onChange={(e) => handleInput("subcategory", e.target.value)}
                           className="w-full border border-slate-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                          placeholder={t("listings.subcategory")}
-                        />
+                          disabled={subcategoriesLoading}
+                        >
+                          <option value="">{t("listings.selectSubcategory")}</option>
+                          {subcategoriesLoading ? (
+                            <option disabled>{t("listings.loading")}...</option>
+                          ) : (
+                            subcategories.map((subcat) => (
+                              <option key={subcat._id} value={subcat._id}>
+                                {subcat?.name[language]} {/* Show English name */}
+                              </option>
+                            ))
+                          )}
+                        </select>
                       </div>
                       <div className="flex items-center">
                         <input
@@ -569,7 +599,7 @@ const VendorListings = () => {
           </div>
         ) : (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {listings.map((listing) => (
+            {listings?.map((listing) => (
               <div
                 key={listing._id}
                 className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
