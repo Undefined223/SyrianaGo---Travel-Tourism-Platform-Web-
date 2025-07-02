@@ -1,5 +1,5 @@
 # Use an official Node runtime as a parent image
-FROM node:18.17.0-alpine AS build
+FROM node:22.13.1-alpine AS builder
 
 # Set the working directory
 WORKDIR /server
