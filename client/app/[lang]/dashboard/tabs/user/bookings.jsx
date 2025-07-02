@@ -3,7 +3,7 @@ import { useLanguage } from "@/app/contexts/LanguageContext";
 import { useUser } from "@/app/contexts/UserContext";
 import { getUserBookings } from "@/app/lib/https/auth.https";
 import { Calendar } from "lucide-react";
-import BookingChatSidebar from "@/app/components/BookingChatSidebar";
+import BookingChatSidebar from "@/app/components/BookingChatSideBar";
 
 export default function UserBookings() {
   const { t, language } = useLanguage();

@@ -1,5 +1,5 @@
 "use client";
-import BookingChatSidebar from "@/app/components/BookingChatSidebar";
+import BookingChatSidebar from "@/app/components/BookingChatSideBar";
 import Loading from "@/app/components/Loading";
 import { useUser } from "@/app/contexts/UserContext";
 import { getVendorBookings } from "@/app/lib/https/booking.https";
