@@ -2,7 +2,7 @@
 // --- routes/listingRoutes.js ---
 const express = require('express');
 const router = express.Router();
-const ListingController = require('../controllers/ListingController');
+const ListingController = require('../controllers/listingController');
 const { upload } = require('../utils/storage');
 const { requireAuth } = require('../middleware/authMiddleware');
 const roleBasedAuthenticationMiddleware = require('../middleware/roleBasedAuthenticationMiddleware');
