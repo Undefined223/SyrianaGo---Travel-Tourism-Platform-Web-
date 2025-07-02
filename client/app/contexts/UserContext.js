@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { login, register, refreshToken, getCurrentUser } from "@/app/lib/https/auth.https";
+import { getCurrentUser, login, refreshToken, register } from "../lib/https/auth.https";
 
 const UserContext = createContext();
 

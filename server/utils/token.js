@@ -18,4 +18,5 @@ const generateRefreshToken = (userId, role) => {
   );
 };
 
+
 module.exports = { generateAccessToken, generateRefreshToken };

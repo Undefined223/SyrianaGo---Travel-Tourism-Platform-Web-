@@ -181,7 +181,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Overlay */}
         {mobileMenuOpen && (
-          <div className="lg:hidden fixed inset-0 top-20 bg-black bg-opacity-25 z-40">
+          <div className="lg:hidden fixed inset-0 top-20 bg-transparent bg-opacity-25 z-40">
             <div className="bg-white shadow-lg border-t border-gray-100">
               <div className="px-4 py-6 space-y-1">
                 {navItems.map((item) => (
@@ -200,8 +200,8 @@ const Navbar = () => {
                   </a>
                 ))}
                 {/* Mobile Icons */}
-                <div className="flex items-center justify-start space-x-4 px-4 py-4 border-t border-gray-100 mt-4">
-                 
+                <div className="flex items-center justify-end space-x-4 px-4 py-4 border-t border-gray-100 mt-4">
+                 <UserDropdown />
                  
                 </div>
               </div>

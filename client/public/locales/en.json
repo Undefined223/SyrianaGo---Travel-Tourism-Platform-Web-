@@ -11,7 +11,6 @@
   "home": {
     "tagline": "Where memories grow"
   },
-  
   "promotion": {
     "title": "Unleash Your Potential",
     "subtitle": "Elevating experiences through seamless connectivity"
@@ -72,7 +71,7 @@
     "save": "Save",
     "cancel": "Cancel",
     "edit": "Edit",
-  "actions": "Actions"
+    "actions": "Actions"
   },
   "category": {
     "loadingTitle": "Loading Category Listings",
@@ -206,7 +205,7 @@
     "admin": "Admin",
     "vendor": "Vendor",
     "user": "User",
-     "role": "Role",
+    "role": "Role",
     "enable2fa": "Enable 2FA",
     "disable2fa": "Disable 2FA",
     "2faError": "Failed to toggle 2FA",
@@ -489,5 +488,46 @@
     "vendor": "Vendor",
     "booking": "Booking",
     "placeholder": "Type your message..."
+  },
+  "resetPassword": {
+    "forgotPassword": "Forgot Password?",
+    "forgotPasswordSubtitle": "Enter your email to receive a reset link",
+    "emailAddress": "Email Address",
+    "emailPlaceholder": "Enter your email",
+    "sendResetLink": "Send Reset Link",
+    "sending": "Sending...",
+    "requiredEmail": "Email is required",
+    "resetEmailSent": "If your email is registered, you'll receive a reset link shortly",
+    "emailSendFailed": "Failed to send reset email",
+    "backToLogin": "Back to login",
+    "title": "Reset Your Password",
+    "subtitle": "Create a new password for your account",
+    "newPassword": "New Password",
+    "newPasswordPlaceholder": "Enter your new password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Re-enter your new password",
+    "resetButton": "Reset Password",
+    "resetting": "Resetting...",
+    "successTitle": "Password Reset!",
+    "successMessage": "Your password has been reset successfully",
+    "redirecting": "Password Reset Successful",
+    "requiredPassword": "Password is required",
+    "minPassword": "Password must be at least 6 characters",
+    "passwordsMatch": "Passwords do not match",
+    "resetFailed": "Password reset failed. The link may have expired",
+    "invalidTokenTitle": "Invalid Reset Link",
+    "invalidToken": "The password reset link is invalid or has expired",
+    "requestNewLink": "Request a new password reset link",
+    "twoFactorAuth": "Two-Factor Authentication",
+    "verificationSent": "We've sent a verification code to",
+    "verificationCode": "Verification Code",
+    "otpPlaceholder": "Enter 6-digit code",
+    "requiredOTP": "Please enter the verification code",
+    "invalidOTP": "Invalid verification code",
+    "verifying": "Verifying...",
+    "verifyCode": "Verify Code",
+    "didntReceive": "Didn't receive the code? Check your spam folder or",
+    "resendCode": "resend code",
+    "resendFunctionality": "Resend functionality not implemented yet"
   }
 }

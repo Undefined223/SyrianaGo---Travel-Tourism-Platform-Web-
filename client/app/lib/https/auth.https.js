@@ -4,7 +4,7 @@ const login = async (credentials) => {
   try {
     const res = await axiosInstance.post("/auth/login", credentials);
     if (res.data.twoFactorRequired) {
-      return { twoFactorRequired: true, email: credentials.email }; 
+      return { twoFactorRequired: true, email: credentials.email };
     }
     const accessToken = res.data.accessToken;
 
@@ -106,21 +106,37 @@ const updateUser = async (data) => {
   }
 };
 
- const getAllUsers = async () => {
+const getAllUsers = async () => {
   const res = await axiosInstance.get("/auth/admin/users");
   return res.data;
 };
 
- const deleteUserById = async (id) => {
+const deleteUserById = async (id) => {
   const res = await axiosInstance.delete(`/auth/admin/users/${id}`);
   return res.data;
 };
 
- const updateUserByAdmin = async (userId, data) => {
+const updateUserByAdmin = async (userId, data) => {
   const res = await axiosInstance.put(`/auth/admin/users/${userId}`, data);
   return res.data;
 };
+const forgotPassword = async (email) => {
+  try {
+    const response = await axiosInstance.post("/auth/forgot-password", { email });
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || error;
+  }
+};
 
+const resetPassword = async (token, password) => {
+  try {
+    const response = await axiosInstance.put(`/auth/reset-password/${token}`, { password });
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || error;
+  }
+};
 export {
   login,
   register,
@@ -137,5 +153,7 @@ export {
   updateUser,
   getAllUsers,
   deleteUserById,
-  updateUserByAdmin
+  updateUserByAdmin,
+  forgotPassword,
+  resetPassword
 };

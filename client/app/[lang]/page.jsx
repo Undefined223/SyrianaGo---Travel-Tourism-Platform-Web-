@@ -1,4 +1,4 @@
-// app/page.tsx
+
 
 import AddToHomeScreen from "../components/AddToHomeScreen";
 import AboutUsSection from "../components/home/sections/AboutUsSection";

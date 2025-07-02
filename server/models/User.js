@@ -22,6 +22,8 @@ const userSchema = new mongoose.Schema({
   twoFactorEnabled: { type: Boolean, default: false },
   twoFactorCode: { type: String },
   twoFactorCodeExpires: { type: Date },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
 }, { timestamps: true });
 
 module.exports = mongoose.model("User", userSchema);

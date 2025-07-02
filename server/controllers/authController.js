@@ -7,7 +7,9 @@ const User = require('../models/User');
 const Listing = require('../models/Listing');
 const sendEmail = require("../utils/email");
 const generateOTP = require("../utils/generateOTP");
-
+const { loadTemplate } = require("../utils/emailTemplate");
+// Add this at the top with other imports
+const crypto = require('crypto');
 
 
 // Register new user
@@ -357,4 +359,80 @@ const updateUserByAdmin = async (req, res) => {
 };
 
 
-module.exports = { login, register,updateMe, getCurrentUser, getUserRecentActivities, googleCallback, refreshToken, getUserBookings, addToWishlist, removeFromWishlist, getWishlist, verify2FA, toggle2FA, getAllUsers, deleteUserById, updateUserByAdmin };
+const forgotPassword = async (req, res) => {
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ message: "Email is required" });
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(200).json({ message: "If registered, you'll receive a reset link" });
+
+    // Generate reset token
+    const resetToken = crypto.randomBytes(20).toString('hex');
+    const resetTokenExpiry = Date.now() + 15 * 60 * 1000; // 15 minutes
+
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = resetTokenExpiry;
+    await user.save();
+
+    // Load email template
+    const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+    const html = await loadTemplate("password-reset-request.html", {
+      appName: process.env.APP_NAME || "Our Service",
+      resetUrl
+    });
+
+    // Send email
+    await sendEmail({
+      to: user.email,
+      subject: "Password Reset Request",
+      html
+    });
+
+    res.status(200).json({ message: "Password reset email sent" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Reset Password
+const resetPassword = async (req, res) => {
+  const { token } = req.params;
+  const { password } = req.body;
+
+  try {
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: "Invalid or expired token" });
+    }
+
+    // Update password
+    user.password = await bcrypt.hash(password, 10);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    // Send confirmation email
+    const html = await loadTemplate("password-reset-success.html", {
+      appName: process.env.APP_NAME || "Our Service"
+    });
+
+    await sendEmail({
+      to: user.email,
+      subject: "Password Changed Successfully",
+      html
+    });
+
+    res.status(200).json({ message: "Password has been reset successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+module.exports = { login, register,updateMe, getCurrentUser, getUserRecentActivities, googleCallback, refreshToken, getUserBookings, addToWishlist, removeFromWishlist, getWishlist, verify2FA, toggle2FA, getAllUsers, deleteUserById, updateUserByAdmin, forgotPassword, resetPassword };

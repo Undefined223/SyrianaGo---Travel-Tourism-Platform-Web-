@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
 
 const sendMail = async ({ to, subject, html }) => {
   const mailOptions = {
-    from: `"Your App Name" <${process.env.EMAIL_USER}>`,
+    from: `"SyrianaGo" <${process.env.EMAIL_USER}>`,
     to,
     subject,
     html,

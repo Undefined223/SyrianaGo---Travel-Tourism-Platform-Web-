@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useUser } from "@/app/contexts/UserContext";
 
 const createAxiosInstance = () => {
   const instance = axios.create({

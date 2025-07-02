@@ -18,12 +18,16 @@ const {
   getAllUsers,
   deleteUserById,
   updateUserByAdmin,
+  forgotPassword,
+  resetPassword,
 } = require("../controllers/authController");
 const { requireAuth } = require("../middleware/authMiddleware");
 const roleBasedAuthenticationMiddleware = require("../middleware/roleBasedAuthenticationMiddleware");
 
 // Traditional
 router.post("/login", login);
+router.post('/forgot-password', forgotPassword);
+router.put('/reset-password/:token', resetPassword);
 
 router.get("/me", requireAuth, getCurrentUser);
 router.put("/me", requireAuth, updateMe);
@@ -41,6 +45,7 @@ router.get('/:userId/recent-activities', getUserRecentActivities);
 router.get("/admin/users", requireAuth, roleBasedAuthenticationMiddleware("admin"), getAllUsers);
 router.put("/admin/users/:userId", requireAuth, roleBasedAuthenticationMiddleware("admin"), updateUserByAdmin);
 router.delete("/admin/users/:userId", requireAuth, roleBasedAuthenticationMiddleware("admin"), deleteUserById);
+
 
 
 // Google OAuth
