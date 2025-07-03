@@ -10,6 +10,11 @@ services:
     environment:
       LETSENCRYPT_HOST: api.syrianago.com
       LETSENCRYPT_EMAIL: asaddiddin@gmail.com
+      VIRTUAL_HOST: api.syrianago.com
+      VIRTUAL_PORT: 5000
+      LETSENCRYPT_HOST: api.syrianago.com
+      LETSENCRYPT_EMAIL: asaddiddin@gmail.com
+      PORT: 5000
       PORT: 5000
       GOOGLE_CLIENT_ID: 613189110305-pp1hrs96br3v02jh512l61klbemsglqu.apps.googleusercontent.com
       GOOGLE_CLIENT_SECRET: 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
@@ -68,7 +73,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      # - ./nginx.conf:/etc/nginx/nginx.conf
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./data/certs:/etc/nginx/certs:ro
       - ./data/vhost.d:/etc/nginx/vhost.d
