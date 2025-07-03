@@ -31,7 +31,7 @@ require("./config/passport");
 const app = express();
 app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-  origin: "http://localhost:3000" || "http://192.168.1.17:3000",
+  origin: "*",
   credentials: true,
 }));
 

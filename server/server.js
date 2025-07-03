@@ -15,7 +15,7 @@ const server = http.createServer(app);
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: ["http://localhost:3000", "http://192.168.1.17:3000"], // Change if different in prod
+    origin: "*", // Change if different in prod
     methods: ["GET", "POST", "PUT", "DELETE"],
   },
 });
