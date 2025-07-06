@@ -14,8 +14,8 @@ const initialForm = {
   cta: { label: "", url: "" },
   isFeatured: false,
   subcategory: "",
+  pricePerDay: "",
 };
-
 const VendorListings = () => {
   const { t, language } = useLanguage();
   const [listings, setListings] = useState([]);
@@ -158,6 +158,7 @@ const VendorListings = () => {
     formData.append("cta", JSON.stringify(form.cta));
     formData.append("isFeatured", form.isFeatured);
     formData.append("subcategory", form.subcategory);
+    formData.append("pricePerDay", form.pricePerDay);
 
     if (fileInputRef.current?.files?.length) {
       Array.from(fileInputRef.current.files).forEach((file) =>
@@ -317,6 +318,28 @@ const VendorListings = () => {
                         placeholder={t("listings.descAr")}
                         dir="rtl"
                       />
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-4">
+                  <h4 className="font-semibold text-slate-900 mb-3 flex items-center">
+                    <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                    </svg>
+                    {t("listings.pricePerDay")}
+                  </h4>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      value={form.pricePerDay}
+                      onChange={(e) => handleInput("pricePerDay", e.target.value)}
+                      className="w-full border border-slate-300 rounded-lg p-3 pl-8 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      placeholder="0"
+                      min="0"
+                      step="0.01"
+                    />
+                    <div className="absolute left-3 top-3 text-slate-400">
+                      <span className="text-sm font-medium">$</span>
                     </div>
                   </div>
                 </div>

@@ -11,6 +11,7 @@ const ListingSchema = new mongoose.Schema({
     fr: { type: String },
     ar: { type: String },
   },
+  pricePerDay: { type: Number, required: true },
   images: [{ type: String }],
   subcategory: { type: mongoose.Schema.Types.ObjectId, ref: 'Subcategory', required: true },
   location: {

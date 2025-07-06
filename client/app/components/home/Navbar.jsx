@@ -202,6 +202,7 @@ const Navbar = () => {
                 {/* Mobile Icons */}
                 <div className="flex items-center justify-end space-x-4 px-4 py-4 border-t border-gray-100 mt-4">
                  <UserDropdown />
+                 <LanguageSwitcher />
                  
                 </div>
               </div>

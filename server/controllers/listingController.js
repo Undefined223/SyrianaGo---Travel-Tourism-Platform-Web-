@@ -1,63 +1,64 @@
-  const Booking = require('../models/Booking');
+const Booking = require('../models/Booking');
 const Listing = require('../models/Listing');
-  const { error, success } = require('../utils');
+const { error, success } = require('../utils');
 
-  exports.createListing = async (req, res) => {
-    try {
-      if (!req.files)
-        return res.status(401).json({ message: "Images Required" })
+exports.createListing = async (req, res) => {
+  try {
+    if (!req.files)
+      return res.status(401).json({ message: "Images Required" })
 
-      const name = JSON.parse(req.body.name || '{}');
-      const description = JSON.parse(req.body.description || '{}');
-      const location = JSON.parse(req.body.location || '{}');
-      const contact = JSON.parse(req.body.contact || '{}');
-      const cta = JSON.parse(req.body.cta || '{}');
-
-
-      const listing = new Listing({
-        name,
-        description,
-        location,
-        contact,
-        cta,
-        subcategory: req.body.subcategory,
-        vendor: req.user.id,
-        isFeatured: req.body.isFeatured === 'true',
-        images: req.files?.map(file => file.filename) || []
-      });
-
-      await listing.save();
-      success.created(res, listing)
-    } catch (errorr) {
-      console.error("Error creating listing:", errorr);
-      error.error(res, errorr.message)
-
-    }
-  };
+    const name = JSON.parse(req.body.name || '{}');
+    const description = JSON.parse(req.body.description || '{}');
+    const location = JSON.parse(req.body.location || '{}');
+    const contact = JSON.parse(req.body.contact || '{}');
+    const cta = JSON.parse(req.body.cta || '{}');
 
 
+    const listing = new Listing({
+      name,
+      description,
+      location,
+      contact,
+      cta,
+      pricePerDay: req.body.pricePerDay,
+      subcategory: req.body.subcategory,
+      vendor: req.user.id,
+      isFeatured: req.body.isFeatured === 'true',
+      images: req.files?.map(file => file.filename) || []
+    });
 
-  exports.getAllListings = async (req, res) => {
-    try {
-      const listings = await Listing.find().populate('vendor');
-      success.fetched(res, listings)
-    } catch (err) {
-      error.error(res, err.message)
-      console.error("Error fetching listings:", err);
+    await listing.save();
+    success.created(res, listing)
+  } catch (errorr) {
+    console.error("Error creating listing:", errorr);
+    error.error(res, errorr.message)
 
-    }
-  };
+  }
+};
 
-  exports.getListingById = async (req, res) => {
-    try {
-      const listing = await Listing.findById(req.params.id);
-      if (!listing) return res.status(404).json({ message: 'Listing not found' });
+
+
+exports.getAllListings = async (req, res) => {
+  try {
+    const listings = await Listing.find().populate('vendor');
+    success.fetched(res, listings)
+  } catch (err) {
+    error.error(res, err.message)
+    console.error("Error fetching listings:", err);
+
+  }
+};
+
+exports.getListingById = async (req, res) => {
+  try {
+    const listing = await Listing.findById(req.params.id);
+    if (!listing) return res.status(404).json({ message: 'Listing not found' });
     success.fetched(res, listing)
-    } catch (err) {
-      error.error(res, err.message)
+  } catch (err) {
+    error.error(res, err.message)
 
-    }
-  };
+  }
+};
 
 exports.updateListing = async (req, res) => {
   try {
@@ -85,6 +86,11 @@ exports.updateListing = async (req, res) => {
       updatedData.isFeatured = updatedData.isFeatured === "true";
     }
 
+      if (req.body.pricePerDay) {
+      updatedData.pricePerDay = req.body.pricePerDay; // ✅ Include this
+    }
+
+
     const listing = await Listing.findByIdAndUpdate(req.params.id, updatedData, { new: true });
     success.updated(res, listing);
   } catch (err) {
@@ -92,33 +98,33 @@ exports.updateListing = async (req, res) => {
   }
 };
 
-  exports.deleteListing = async (req, res) => {
-    try {
-      await Listing.findByIdAndDelete(req.params.id);
-      success.deleted(res)
-    } catch (err) {
-      error.error(res, err.message)
+exports.deleteListing = async (req, res) => {
+  try {
+    await Listing.findByIdAndDelete(req.params.id);
+    success.deleted(res)
+  } catch (err) {
+    error.error(res, err.message)
 
-    }
-  };
+  }
+};
 
 
-  exports.getListingsBySubcategory = async (req, res) => {
-    try {
-      // Trim whitespace and newlines from param
-      const subcategoryId = req.params.subcategoryId.trim();
+exports.getListingsBySubcategory = async (req, res) => {
+  try {
+    // Trim whitespace and newlines from param
+    const subcategoryId = req.params.subcategoryId.trim();
 
-      const listings = await Listing.find({ subcategory: subcategoryId });
+    const listings = await Listing.find({ subcategory: subcategoryId });
 
-      success.fetched(res, listings)
-    } catch (error) {
-      console.error('Error fetching listings by subcategory:', error);
-      error.error(res, err.message)
+    success.fetched(res, listings)
+  } catch (error) {
+    console.error('Error fetching listings by subcategory:', error);
+    error.error(res, err.message)
 
-    }
-  };
+  }
+};
 
-  exports.getVendorListings = async (req, res) => {
+exports.getVendorListings = async (req, res) => {
   try {
     const listings = await Listing.find({ vendor: req.user.id });
     res.status(200).json(listings);

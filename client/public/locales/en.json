@@ -383,7 +383,9 @@
     "created": "Created",
     "updated": "Updated",
     "loading": "Loading your listings...",
-    "saveError": "Failed to save listing"
+    "saveError": "Failed to save listing",
+    "pricePerDay": "Price per Day",
+    "bestPrice": "Best Price Online"
   },
   "reviews": {
     "loading": "Loading reviews...",

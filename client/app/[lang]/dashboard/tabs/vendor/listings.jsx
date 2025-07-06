@@ -14,8 +14,8 @@ const initialForm = {
   cta: { label: "", url: "" },
   isFeatured: false,
   subcategory: "",
+  pricePerDay: "",
 };
-
 const VendorListings = () => {
   const { t, language } = useLanguage();
   const [listings, setListings] = useState([]);
@@ -158,6 +158,7 @@ const VendorListings = () => {
     formData.append("cta", JSON.stringify(form.cta));
     formData.append("isFeatured", form.isFeatured);
     formData.append("subcategory", form.subcategory);
+    formData.append("pricePerDay", form.pricePerDay);
 
     if (fileInputRef.current?.files?.length) {
       Array.from(fileInputRef.current.files).forEach((file) =>
@@ -320,6 +321,31 @@ const VendorListings = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* Price Per Day */}
+                <div className="bg-slate-50 rounded-xl p-4">
+                  <h4 className="font-semibold text-slate-900 mb-3 flex items-center">
+                    <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                    </svg>
+                    {t("listings.pricePerDay")}
+                  </h4>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      value={form.pricePerDay}
+                      onChange={(e) => handleInput("pricePerDay", e.target.value)}
+                      className="w-full border border-slate-300 rounded-lg p-3 pl-8 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      placeholder="0"
+                      min="0"
+                      step="0.01"
+                    />
+                    <div className="absolute left-3 top-3 text-slate-400">
+                      <span className="text-sm font-medium">TND</span>
+                    </div>
+                  </div>
+                </div>
+
 
                 {/* Location */}
                 <div className="bg-slate-50 rounded-xl p-4 relative">
@@ -543,7 +569,7 @@ const VendorListings = () => {
                     accept="image/*"
                     className="w-full border border-slate-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                   />
-                  {form.images && form.images.length > 0 && (
+                  {form?.images && form.images?.length > 0 && (
                     <div className="flex gap-3 mt-4 flex-wrap">
                       {form.images.map((img, i) => (
                         <div key={i} className="relative">
@@ -580,7 +606,7 @@ const VendorListings = () => {
         )}
 
         {/* Listings Grid */}
-        {listings.length === 0 ? (
+        {listings?.length === 0 ? (
           <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-12 text-center">
             <svg className="w-16 h-16 text-slate-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -605,14 +631,14 @@ const VendorListings = () => {
                 className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
               >
                 {/* Images */}
-                {listing.images && listing.images.length > 0 && (
+                {listing?.images && listing?.images?.length > 0 && (
                   <div className="relative h-48 bg-slate-100">
                     <img
                       src={`${process.env.NEXT_PUBLIC_NO_API_URL}uploads/${listing.images[0]}`}
                       alt={listing.name?.en || t("listings.imageAlt")}
                       className="w-full h-full object-cover"
                     />
-                    {listing.isFeatured && (
+                    {listing?.isFeatured && (
                       <div className="absolute top-3 left-3">
                         <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-lg">
                           <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -622,10 +648,10 @@ const VendorListings = () => {
                         </span>
                       </div>
                     )}
-                    {listing.images.length > 1 && (
+                    {listing.images?.length > 1 && (
                       <div className="absolute top-3 right-3">
                         <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-black bg-opacity-50 text-white">
-                          +{listing.images.length - 1}
+                          +{listing?.images?.length - 1}
                         </span>
                       </div>
                     )}

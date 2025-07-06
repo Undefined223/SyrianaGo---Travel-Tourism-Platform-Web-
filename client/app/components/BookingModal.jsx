@@ -386,7 +386,7 @@ export default function BookingModal({ open, onClose, listingId }) {
                     aria-label={t("common.close")}
                 >
                     ×
-                </button>
+                </button>   
                 {success ? (
                     <div className="flex flex-col items-center justify-center py-12">
                         <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">

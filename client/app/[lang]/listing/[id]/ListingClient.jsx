@@ -375,6 +375,7 @@ export default function ListingDetailsPage() {
             </div>
 
 
+
             {/* Right Column - Booking Card */}
             <div className="lg:col-span-2">
               <div className="sticky top-8">
@@ -390,6 +391,32 @@ export default function ListingDetailsPage() {
                     </p>
                   </div>
 
+                  {listing.pricePerDay && (
+                    <div className="mb-8 p-6 bg-gradient-to-r from-green-50 to-green-100 rounded-xl border-l-4 border-green-500">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: '#337914' }}>
+                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                            </svg>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-600" style={{ fontFamily: "'Times New Roman Custom', serif" }}>
+                              {t("listings.pricePerDay") || "Price per day"}
+                            </p>
+                            <p className="text-2xl font-bold" style={{ color: '#337914', fontFamily: "'Tennyson BC', serif" }}>
+                              {listing.pricePerDay} TND
+                            </p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs text-gray-500" style={{ fontFamily: "'Times New Roman Custom', serif" }}>
+                            {t("listings.bestPrice") || "Best price online"}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   <div className="p-8">
                     {/* Premium Features */}
                     <div className="space-y-4 mb-8">
@@ -446,11 +473,18 @@ export default function ListingDetailsPage() {
                       <button
                         className="group w-full cursor-pointer py-5 px-6 rounded-xl font-bold text-xl text-white transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center gap-3 shadow-lg"
                         style={{ background: 'linear-gradient(135deg, #337914 0%, #2d6b12 100%)', fontFamily: "'Tennyson BC', serif" }}
-                        onClick={() => setIsBookingOpen(true)}
+                        onClick={() => {
+                          if (!user?._id) {
+                            alert("You have to be logged in before booking.");
+                            return;
+                          }
+                          setIsBookingOpen(true);
+                        }}
                       >
                         {t("listing.bookNow")}
                         <ExternalLink className="w-5 h-5 group-hover:rotate-12 transition-transform" />
                       </button>
+
                       {/* )} */}
                       <BookingModal
                         open={isBookingOpen}
@@ -497,7 +531,7 @@ export default function ListingDetailsPage() {
             </div>
           </div>
         </div>
-      <Reviews listingId={listing._id} />
+        <Reviews listingId={listing._id} />
 
 
         {/* Enhanced Image Modal */}

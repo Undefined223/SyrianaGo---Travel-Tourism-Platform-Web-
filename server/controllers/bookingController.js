@@ -49,14 +49,30 @@ exports.createBooking = async (req, res) => {
     const listing = await Listing.findById(listingId).populate('vendor');
     if (!listing) return error.notFound(res, 'Listing not found');
 
-    const placeholders = {
+     // Calculate number of nights
+    const checkInDate = new Date(details.checkIn);
+    const checkOutDate = new Date(details.checkOut);
+    const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+
+    if (nights <= 0) {
+      return error.badRequest(res, 'Invalid booking dates');
+    }
+
+     const totalPrice = nights * listing.pricePerDay;
+    details.price = totalPrice;
+
+    
+     const placeholders = {
       listingTitle: listing.title,
       guestName: user.name,
       userName: user.name,
-      checkIn: new Date(details.checkIn).toDateString(),
-      checkOut: new Date(details.checkOut).toDateString(),
-      guests: details.guests.toString(),
+      checkIn: checkInDate.toDateString(),
+      checkOut: checkOutDate.toDateString(),
+      guests: details.guests?.toString() || '1',
+      price: `$${totalPrice}`,
+      nights: nights.toString(),
     };
+    
     // Load templates
     const vendorHtml = await loadTemplate('newBookingVendor.html', placeholders);
     const userHtml = await loadTemplate('bookingConfirmed.html', placeholders);

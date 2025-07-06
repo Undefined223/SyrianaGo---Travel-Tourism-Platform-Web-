@@ -382,7 +382,9 @@
     "created": "Créé",
     "updated": "Mis à jour",
     "loading": "Chargement de vos annonces...",
-    "saveError": "Échec de l'enregistrement de l'annonce"
+    "saveError": "Échec de l'enregistrement de l'annonce",
+    "pricePerDay": "Prix ​​par jour",
+    "bestPrice": "Meilleur prix en ligne"
   },
   "reviews": {
     "loading": "Chargement des avis...",
