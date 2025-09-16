@@ -1,5 +1,7 @@
 # SyrianaGo.com — Web Application
 
+<!-- avatar: https://i.ibb.co/0RLkNC1d/Screenshot-2025-09-16-020147.png -->
+
 This is the **responsive web application** for SyrianaGo.com, a tourism and booking platform focused on Syria.  
 Built with Next.js, it provides users with a rich interface for browsing, booking, and managing travel-related services.
 
@@ -36,5 +38,5 @@ Built with Next.js, it provides users with a rich interface for browsing, bookin
 git clone https://github.com/Undefined223/SyrianaGo
 
 
-<!-- avatar: https://i.ibb.co/0RLkNC1d/Screenshot-2025-09-16-020147.png -->
+
 
